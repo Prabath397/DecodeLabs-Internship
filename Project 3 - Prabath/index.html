@@ -1,0 +1,33 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="description" content="StockPilot inventory management system">
+  <title>StockPilot - Inventory Management</title>
+  <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <div class="shell">
+    <aside class="sidebar" id="sidebar">
+      <div class="brand"><span class="brand-mark">S</span><span>STOCKPILOT<small>Inventory Management</small></span></div>
+      <nav aria-label="Primary navigation">
+        <button class="nav-item active" data-view="dashboard">Dashboard</button>
+        <button class="nav-item" data-view="products">Products</button>
+        <button class="nav-item" data-view="categories">Categories</button>
+        <button class="nav-item" data-view="suppliers">Suppliers</button>
+        <button class="nav-item" data-view="movements">Stock Movements</button>
+      </nav>
+      <div class="sidebar-foot"><span class="status-dot"></span> SQLite connected</div>
+    </aside>
+    <main>
+      <header class="topbar"><button id="menuButton" class="icon-button" aria-label="Toggle navigation">☰</button><div><h1 id="pageTitle">Dashboard</h1><p id="pageSubtitle">Your inventory at a glance</p></div><button class="button primary" id="quickAdd">+ Add Product</button></header>
+      <section id="content" class="content" aria-live="polite"></section>
+    </main>
+  </div>
+  <div id="toastRegion" class="toasts" aria-live="polite"></div>
+  <dialog id="modal"><div class="dialog-shell"><div class="dialog-head"><div><h2 id="modalTitle"></h2><p id="modalSubtitle"></p></div><button type="button" class="icon-button" data-close aria-label="Close">×</button></div><div id="modalBody"></div></div></dialog>
+  <script type="module" src="js/app.js"></script>
+</body>
+</html>
