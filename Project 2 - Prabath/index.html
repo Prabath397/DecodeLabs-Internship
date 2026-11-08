@@ -1,0 +1,61 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="TaskFlow student productivity dashboard">
+  <title>TaskFlow</title>
+  <link rel="stylesheet" href="/css/style.css">
+  <script src="/js/api.js" defer></script>
+  <script src="/js/app.js" defer></script>
+</head>
+<body>
+  <header>
+    <div><span class="eyebrow">Student productivity</span><h1>TaskFlow</h1></div>
+    <button id="themeButton" class="secondary" type="button">Toggle theme</button>
+  </header>
+  <main>
+    <section id="notice" class="notice" hidden aria-live="polite"></section>
+    <section id="importPanel" class="notice import" hidden>
+      <span>Tasks from the earlier browser-only version were found.</span>
+      <div><button id="importButton" type="button">Import once</button><button id="dismissImport" class="secondary" type="button">Not now</button></div>
+    </section>
+    <section class="stats" aria-label="Task statistics">
+      <article><span>Total</span><strong id="totalTasks">—</strong></article>
+      <article><span>Pending</span><strong id="pendingTasks">—</strong></article>
+      <article><span>Completed</span><strong id="completedTasks">—</strong></article>
+      <article><span>Overdue</span><strong id="overdueTasks">—</strong></article>
+      <article><span>Progress</span><strong id="completionPercentage">—</strong></article>
+    </section>
+    <section class="workspace">
+      <article class="panel editor">
+        <h2 id="formTitle">Add task</h2>
+        <form id="taskForm">
+          <input id="taskId" type="hidden">
+          <label>Title<input id="title" name="title" minlength="3" maxlength="120" required></label>
+          <label>Description<textarea id="description" name="description" maxlength="1000" rows="4"></textarea></label>
+          <div class="form-row">
+            <label>Category<select id="category" name="category"><option>Assignments</option><option>Projects</option><option>Exams</option><option>Personal</option><option selected>Other</option></select></label>
+            <label>Priority<select id="priority" name="priority"><option>Low</option><option selected>Medium</option><option>High</option></select></label>
+          </div>
+          <label>Due date<input id="dueDate" name="dueDate" type="date"></label>
+          <div class="actions"><button id="submitButton" type="submit">Create task</button><button id="cancelEdit" class="secondary" type="button" hidden>Cancel</button></div>
+        </form>
+      </article>
+      <article class="panel tasks-panel">
+        <div class="tasks-heading"><h2>Your tasks</h2><span id="taskCount"></span></div>
+        <form id="filters" class="filters">
+          <input id="search" name="search" type="search" placeholder="Search tasks">
+          <select id="statusFilter" name="status"><option value="">All statuses</option><option>Pending</option><option>Completed</option></select>
+          <select id="categoryFilter" name="category"><option value="">All categories</option><option>Assignments</option><option>Projects</option><option>Exams</option><option>Personal</option><option>Other</option></select>
+          <select id="priorityFilter" name="priority"><option value="">All priorities</option><option>Low</option><option>Medium</option><option>High</option></select>
+          <select id="sortBy" name="sortBy"><option value="createdAt">Newest</option><option value="dueDate">Due date</option><option value="priority">Priority</option><option value="title">Title</option></select>
+          <select id="order" name="order"><option value="desc">Descending</option><option value="asc">Ascending</option></select>
+        </form>
+        <div id="loading" class="state">Loading tasks…</div>
+        <div id="taskList" class="task-list"></div>
+      </article>
+    </section>
+  </main>
+</body>
+</html>

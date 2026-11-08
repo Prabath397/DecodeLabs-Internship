@@ -1,0 +1,26 @@
+[
+  {
+    "id": "40c2b12c-be92-4699-a451-28a8c130d256",
+    "title": "Task 1",
+    "description": "new task",
+    "category": "Assignments",
+    "priority": "Medium",
+    "status": "Pending",
+    "dueDate": "2026-11-17",
+    "createdAt": "2026-11-05T17:43:23.304Z",
+    "updatedAt": "2026-11-05T17:43:36.761Z",
+    "completedAt": null
+  },
+  {
+    "id": "8e605a6c-8169-465a-b53f-37a9f98ab332",
+    "title": "dsd",
+    "description": "dvdsvd",
+    "category": "Other",
+    "priority": "High",
+    "status": "Pending",
+    "dueDate": "2026-11-03",
+    "createdAt": "2026-11-05T17:43:52.343Z",
+    "updatedAt": "2026-11-05T17:43:52.343Z",
+    "completedAt": null
+  }
+]

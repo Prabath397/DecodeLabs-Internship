@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="TaskFlow helps students organize academic work and manage deadlines.">
+  <meta name="theme-color" content="#1e3a8a">
+  <title>TaskFlow - Student Productivity Dashboard</title>
+  <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <a class="skip-link" href="#main-content">Skip to content</a>
+  <div class="app-shell">
+    <aside class="sidebar" id="sidebar" aria-label="Main navigation">
+      <div class="brand"><span class="brand-mark" aria-hidden="true">✓</span><span>TaskFlow</span></div>
+      <nav class="side-nav" aria-label="Primary">
+        <a class="nav-link active" href="#dashboard" aria-current="page"><span aria-hidden="true">▦</span>Dashboard</a>
+        <a class="nav-link" href="#tasks"><span aria-hidden="true">☷</span>My tasks</a>
+      </nav>
+      <div class="sidebar-footer">
+        <p class="sidebar-note">Small steps, consistent progress.</p>
+        <button class="theme-switch" id="theme-toggle" type="button" aria-label="Switch to dark theme"><span aria-hidden="true">◐</span><span>Theme</span></button>
+      </div>
+    </aside>
+
+    <div class="content-shell">
+      <header class="topbar">
+        <button class="icon-button menu-button" id="menu-toggle" type="button" aria-controls="sidebar" aria-expanded="false" aria-label="Open navigation"><span aria-hidden="true">☰</span></button>
+        <div class="mobile-brand">TaskFlow</div>
+        <div class="topbar-actions">
+          <button class="icon-button desktop-theme" id="theme-toggle-desktop" type="button" aria-label="Switch to dark theme"><span aria-hidden="true">◐</span></button>
+          <button class="button button-primary compact" type="button" data-open-task-modal><span aria-hidden="true">+</span><span class="button-label">New task</span></button>
+        </div>
+      </header>
+
+      <main id="main-content">
+        <section class="welcome" id="dashboard" aria-labelledby="welcome-heading">
+          <div>
+            <p class="eyebrow" id="current-date"></p>
+            <h1 id="welcome-heading"><span id="greeting">Good morning</span>, Student.</h1>
+            <p class="welcome-copy">Here is a clear view of what needs your attention today.</p>
+          </div>
+          <button class="button button-primary welcome-action" type="button" data-open-task-modal><span aria-hidden="true">+</span> Add task</button>
+        </section>
+
+        <section class="stats-grid" aria-label="Task statistics">
+          <article class="stat-card"><span class="stat-icon indigo" aria-hidden="true">▦</span><div><p>Total tasks</p><strong id="total-count">0</strong><small id="total-caption">No tasks yet</small></div></article>
+          <article class="stat-card"><span class="stat-icon green" aria-hidden="true">✓</span><div><p>Completed</p><strong id="completed-count">0</strong><small id="completed-caption">Keep it going</small></div></article>
+          <article class="stat-card"><span class="stat-icon amber" aria-hidden="true">◷</span><div><p>Pending</p><strong id="pending-count">0</strong><small id="pending-caption">Nothing pending</small></div></article>
+          <article class="stat-card"><span class="stat-icon red" aria-hidden="true">!</span><div><p>Overdue</p><strong id="overdue-count">0</strong><small id="overdue-caption">You are up to date</small></div></article>
+        </section>
+
+        <section class="dashboard-grid" aria-label="Dashboard overview">
+          <article class="panel progress-panel">
+            <div class="panel-heading"><div><p class="eyebrow">Weekly focus</p><h2>Task completion</h2></div><strong id="progress-percent">0%</strong></div>
+            <div class="progress-track" role="progressbar" aria-label="Task completion percentage" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0"><span id="progress-bar"></span></div>
+            <p class="progress-copy" id="progress-copy">Add your first task to begin tracking progress.</p>
+          </article>
+          <article class="panel motivation-panel"><span class="motivation-mark" aria-hidden="true">“</span><p id="motivation-message">Focus on the next meaningful step. Momentum follows action.</p><span>Today’s focus</span></article>
+        </section>
+
+        <section class="list-section" aria-labelledby="upcoming-heading">
+          <div class="section-heading"><div><p class="eyebrow">Plan ahead</p><h2 id="upcoming-heading">Upcoming deadlines</h2></div><a href="#tasks" class="text-link">View all tasks <span aria-hidden="true">→</span></a></div>
+          <div class="deadline-grid" id="upcoming-list"></div>
+        </section>
+
+        <section class="list-section" id="tasks" aria-labelledby="tasks-heading">
+          <div class="section-heading tasks-heading"><div><p class="eyebrow">Workspace</p><h2 id="tasks-heading">Recent tasks</h2></div><button class="button button-secondary" type="button" data-open-task-modal><span aria-hidden="true">+</span> Add task</button></div>
+          <form class="filters" id="filters-form" role="search">
+            <label class="search-field"><span class="sr-only">Search tasks</span><span aria-hidden="true">⌕</span><input id="search-input" type="search" placeholder="Search tasks"></label>
+            <label><span class="sr-only">Filter by status</span><select id="status-filter"><option value="all">All statuses</option><option value="pending">Pending</option><option value="completed">Completed</option><option value="overdue">Overdue</option></select></label>
+            <label><span class="sr-only">Filter by priority</span><select id="priority-filter"><option value="all">All priorities</option><option value="high">High priority</option><option value="medium">Medium priority</option><option value="low">Low priority</option></select></label>
+            <label><span class="sr-only">Sort tasks</span><select id="sort-select"><option value="created">Newest first</option><option value="deadline">Deadline</option><option value="priority">Priority</option></select></label>
+          </form>
+          <div class="task-list" id="task-list" aria-live="polite"></div>
+        </section>
+      </main>
+      <footer>TaskFlow keeps your academic priorities in one place.</footer>
+    </div>
+  </div>
+
+  <div class="modal-backdrop" id="task-modal" hidden>
+    <section class="modal" role="dialog" aria-modal="true" aria-labelledby="task-modal-title">
+      <div class="modal-header"><div><p class="eyebrow">Task details</p><h2 id="task-modal-title">Add a new task</h2></div><button class="icon-button close-modal" type="button" aria-label="Close dialog">×</button></div>
+      <form id="task-form" novalidate>
+        <input type="hidden" id="task-id">
+        <div class="form-field full"><label for="task-title">Task title <span aria-hidden="true">*</span></label><input id="task-title" name="title" type="text" maxlength="100" required aria-describedby="title-error"><p class="field-error" id="title-error" aria-live="polite"></p></div>
+        <div class="form-field full"><label for="task-description">Description <span class="optional">Optional</span></label><textarea id="task-description" name="description" rows="3" maxlength="500"></textarea></div>
+        <div class="form-grid"><div class="form-field"><label for="task-category">Category</label><select id="task-category" name="category"><option>Assignments</option><option>Projects</option><option>Exams</option><option>Personal</option><option>Other</option></select></div><div class="form-field"><label for="task-priority">Priority</label><select id="task-priority" name="priority"><option value="medium">Medium</option><option value="high">High</option><option value="low">Low</option></select></div><div class="form-field full"><label for="task-deadline">Deadline <span aria-hidden="true">*</span></label><input id="task-deadline" name="deadline" type="date" required aria-describedby="deadline-error"><p class="field-error" id="deadline-error" aria-live="polite"></p></div></div>
+        <div class="modal-actions"><button class="button button-secondary close-modal" type="button">Cancel</button><button class="button button-primary" type="submit" id="task-submit">Save task</button></div>
+      </form>
+    </section>
+  </div>
+
+  <div class="modal-backdrop" id="delete-modal" hidden>
+    <section class="modal confirmation-modal" role="dialog" aria-modal="true" aria-labelledby="delete-modal-title">
+      <div class="confirmation-icon" aria-hidden="true">!</div><h2 id="delete-modal-title">Delete this task?</h2><p id="delete-message">This action cannot be undone.</p><div class="modal-actions"><button class="button button-secondary close-delete" type="button">Cancel</button><button class="button button-danger" id="confirm-delete" type="button">Delete task</button></div>
+    </section>
+  </div>
+  <div class="toast-region" id="toast-region" aria-live="polite" aria-atomic="true"></div>
+  <script src="js/app.js"></script>
+</body>
+</html>
